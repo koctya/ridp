@@ -1,0 +1,10 @@
+log
+ tmp
+ db/*.sqlite3
+ nbproject/private
+ bin
+ .rbx
+ .DS_Store
+ *~
+ *# 
+
