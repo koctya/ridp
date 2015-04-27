@@ -1,14 +1,19 @@
 Rails.application.routes.draw do
 
-  post '/saml/consume' => 'saml#consume'
+  #post '/saml/consume' => 'saml#consume'
 
   get 'home/index'
 
   get '/saml/auth' => 'saml_idp#new'
   post '/saml/auth' => 'saml_idp#create'
 
-  get 'saml_idp/idp_authenticate'
-  get 'saml_idp/idp_make_saml_response'
+  #resource :users
+
+  get '/signup' => 'users#new'
+  post '/users' => 'users#create', as: :users
+
+  #get 'saml_idp/idp_authenticate'
+  #get 'saml_idp/idp_make_saml_response'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

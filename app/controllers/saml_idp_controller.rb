@@ -2,14 +2,15 @@ class SamlIdpController < SamlIdp::IdpController
   before_filter :find_account
   # layout 'saml_idp'
 
-  def idp_authenticate(email, password)
-    true
-  end
+  #def idp_authenticate(email, password)
+  #  true
+  #end
 
-#  def idp_authenticate(email, password)
-#    user = @account.users.where(:email => params[:email]).first
-#    user && user.valid_password?(params[:password]) ? user : nil
-#  end
+  def idp_authenticate(email, password)
+    #binding.pry
+    user = User.where(:email => params[:email]).first
+    #user && user.valid_password?(params[:password]) ? user : nil
+  end
 
 #  def idp_make_saml_response(user)
 #    encode_SAMLResponse("you@example.com")
