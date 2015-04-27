@@ -1,5 +1,5 @@
 class SamlIdpController < SamlIdp::IdpController
-  before_filter :find_account
+  #before_filter :find_account
   # layout 'saml_idp'
 
   #def idp_authenticate(email, password)
@@ -21,10 +21,10 @@ class SamlIdpController < SamlIdp::IdpController
 
   private
 
-  def find_account
-    @subdomain = saml_acs_url[/https?:\/\/(.+?)\.example.com/, 1]
-    @account = Account.find_by_subdomain(@subdomain)
-    render :status => :forbidden unless @account.saml_enabled?
-  end
+  #def find_account
+    #@subdomain = saml_acs_url[/https?:\/\/(.+?)\.example.com/, 1]
+    #@account = Account.find_by_subdomain(@subdomain)
+    #render :status => :forbidden unless @account.saml_enabled?
+  #end
 
 end
