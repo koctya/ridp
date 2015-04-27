@@ -1,9 +1,20 @@
 Rails.application.routes.draw do
+
+  post '/saml/consume' => 'saml#consume'
+
+  get 'home/index'
+
+  get '/saml/auth' => 'saml_idp#new'
+  post '/saml/auth' => 'saml_idp#create'
+
+  get 'saml_idp/idp_authenticate'
+  get 'saml_idp/idp_make_saml_response'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  # root 'welcome#index'
+  root 'home#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
