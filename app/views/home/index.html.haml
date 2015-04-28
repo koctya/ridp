@@ -2,3 +2,9 @@
 %p The rails SAML Identity Provider app implements the server side of SAML authentication. It  acts as an IdP (Identity Provider) using the SAML v2.0 protocol. It provides a means for managing authentication requests and confirmation responses for SPs (Service Providers).
 
 %p= link_to 'Sign up', signup_path
+
+%hr
+%h4 Registered Users
+%ul
+  - @users.each do |user|
+    %li= user.email

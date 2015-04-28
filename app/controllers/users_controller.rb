@@ -5,6 +5,7 @@ class UsersController < ApplicationController
   end
 
   def create
+    #binding.pry
     @user = User.new(user_profile_parameters)
     if @user.save
       redirect_to root_url, :notice => "Signed up!"
