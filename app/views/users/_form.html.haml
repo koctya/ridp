@@ -1,0 +1,19 @@
+.form-horizontal
+  = semantic_form_for  @user do |f|
+    .col-md-6
+      - if @user.errors.any?
+        .error_messages
+          %h2 Form is invalid
+          %ul
+            - for message in @user.errors.full_messages
+              %li= message
+      .fieldset
+        = f.inputs do
+          = f.input :first_name
+          = f.input :last_name
+          = f.input :email
+          = f.input :password
+          = f.input :password_confirmation
+
+      .actions
+        = f.submit 'Save'

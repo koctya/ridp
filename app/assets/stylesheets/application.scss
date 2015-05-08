@@ -12,10 +12,12 @@
  *
  *= require_tree .
  *= require_self
+ *= require formtastic
  */
 @import "bootstrap-sprockets";
 @import "bootstrap";
 @import 'bootstrap/theme';
+@import 'home';
 
 .alert-alert {
   @extend .alert-warning;

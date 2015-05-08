@@ -1,10 +1,7 @@
+
 class SamlIdpController < SamlIdp::IdpController
   #before_filter :find_account
   # layout 'saml_idp'
-
-  #def idp_authenticate(email, password)
-  #  true
-  #end
 
   def idp_authenticate(email, password)
     #binding.pry
@@ -12,11 +9,14 @@ class SamlIdpController < SamlIdp::IdpController
     #user && user.valid_password?(params[:password]) ? user : nil
   end
 
-#  def idp_make_saml_response(user)
-#    encode_SAMLResponse("you@example.com")
-#  end
   def idp_make_saml_response(user)
-    encode_SAMLResponse(user.email)
+
+    #binding.pry
+    provider = %[<saml:AttributeStatement><saml:Attribute Name="uid"><saml:AttributeValue>#{user.uid}</saml:AttributeValue></saml:Attribute><saml:Attribute Name="First Name"><saml:AttributeValue>#{user.first_name}</saml:AttributeValue></saml:Attribute><saml:Attribute Name="Last Name"><saml:AttributeValue>#{user.last_name}</saml:AttributeValue></saml:Attribute><saml:Attribute Name="http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress"><saml:AttributeValue>#{user.email}</saml:AttributeValue></saml:Attribute></saml:AttributeStatement>]
+#binding.pry
+    encode_SAMLResponse(user.email, { attributes_provider: provider })
+    #encode_SAMLResponse(user.email)
+    #encode_response(user.email)
   end
 
   private

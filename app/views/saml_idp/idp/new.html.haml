@@ -1,0 +1,18 @@
+.container
+  %h2 SSO Sign In
+  - if @saml_idp_fail_msg
+    #saml_idp_fail_msg.flash.error= @saml_idp_fail_msg
+  = form_tag do
+    = hidden_field_tag("SAMLRequest", params[:SAMLRequest])
+    %p
+      = label_tag :email
+      = email_field_tag :email, params[:email], :autocapitalize => "off", :autocorrect => "off", :autofocus => "autofocus", :spellcheck => "false", :size => 30, :class => "email_pwd txt"
+    %p
+      = label_tag :password
+      = password_field_tag :password, params[:password], :autocapitalize => "off", :autocorrect => "off", :spellcheck => "false", :size => 30, :class => "email_pwd txt"
+    %p
+      = submit_tag "Sign in", :class => "button big blueish"
+
+  %p
+    Or, create new account
+    = link_to 'Sign up', signup_path

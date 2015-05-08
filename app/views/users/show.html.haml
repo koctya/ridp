@@ -1,0 +1,17 @@
+.container
+  %p#notice= notice
+
+  %h3 User: #{@user.email}
+
+  %p
+    %b Firstname:
+    = @user.first_name
+  %p
+    %b Lastname:
+    = @user.last_name
+
+  = link_to 'Edit', edit_user_path(@user)
+  \|
+  = link_to 'Back', root_path
+
+  %p= link_to 'Destroy', @user, :method => :delete, :data => { :confirm => 'Are you sure?' }

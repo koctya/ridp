@@ -10,6 +10,7 @@ gem 'pg', :group => :production
 gem 'sass-rails', '~> 5.0'
 gem 'haml-rails'
 gem 'bootstrap-sass'
+gem 'formtastic'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .coffee assets and views
@@ -31,7 +32,9 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'devise'
 #gem 'omniauth-github'
 
-gem 'ruby-saml-idp'
+#gem 'saml_idp'
+#gem 'ruby-saml-idp'
+gem "ruby-saml-idp", :git => "https://github.com/lawrencepit/ruby-saml-idp.git"
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

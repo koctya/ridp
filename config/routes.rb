@@ -7,10 +7,10 @@ Rails.application.routes.draw do
   get '/saml/auth' => 'saml_idp#new'
   post '/saml/auth' => 'saml_idp#create'
 
-  #resource :users
+  resources :users
 
   get '/signup' => 'users#new'
-  post '/users' => 'users#create', as: :users
+  #post '/users' => 'users#create', as: :users
 
   #get 'saml_idp/idp_authenticate'
   #get 'saml_idp/idp_make_saml_response'
