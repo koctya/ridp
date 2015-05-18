@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   post '/saml/auth' => 'saml_idp#create'
 
   resources :users
+  get '/sp_edit' => 'users#sp_edit'
 
   get '/signup' => 'users#new'
   #post '/users' => 'users#create', as: :users

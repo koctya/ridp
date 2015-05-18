@@ -5,9 +5,15 @@ class UsersController < ApplicationController
 
   def new
     @user = User.new
+    session[:forwarding_url] = params[:login_url]
   end
 
   def edit
+  end
+
+  def sp_edit
+    @user = User.where(email: params[:user_id]).first
+    render :edit
   end
 
   def show
@@ -16,21 +22,27 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_profile_parameters)
     @user.uid = UUID.generate
-    #binding.pry
     if @user.save
-      redirect_to root_url, :notice => "Signed up!"
+      flash[:notice] = "#{@user.email} signed in."
+      redirect_to(session[:forwarding_url] || root_path)
+      session.delete(:forwarding_url)
     else
       render "new"
     end
   end
 
   def update
-    #binding.pry
     @user.update_attributes(user_profile_parameters)
 
     respond_to do |format|
       if @user.save
-        format.html { redirect_to user_path(@user), notice: 'Profile was successfully updated.' }
+        format.html do
+          if params[:sp_profile_url]
+            redirect_to params[:sp_profile_url] + "?first_name=#{params[:user][:first_name]}&last_name=#{params[:user][:last_name]}"
+          else
+            redirect_to user_path(@user), notice: 'Profile was successfully updated.'
+          end
+        end
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -57,7 +69,7 @@ class UsersController < ApplicationController
   end
 
   def user_profile_parameters
-    params.require(:user).permit(:email, :password, :password_confirmation, :first_name, :last_name)
+    params.require(:user).permit(:email, :password, :password_confirmation, :first_name, :last_name, :login_url)
   end
 
 end
