@@ -3,4 +3,7 @@ class User < ActiveRecord::Base
   validates_presence_of :password, :on => :create
   validates_uniqueness_of :email
 
+  def signed_in?
+    logged_in
+  end
 end

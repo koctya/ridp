@@ -11,6 +11,36 @@ class UsersController < ApplicationController
   def edit
   end
 
+  def sign_in
+    @user = User.new
+    #binding.pry
+    #@email = params[:email]
+    session[:forwarding_url] = params[:login_url]
+  end
+
+  def create_session
+    user = User.where(:email => params[:email]).first
+    #binding.pry
+    user && user.authenticate(params[:password]) ? user : nil
+    session[:user_id] = user.email
+    user.logged_in = true
+    user.current_logged_in_at = Time.now
+    user.save
+    redirect_to root_path
+  end
+
+  def sign_out
+    user = User.where(email: params[:email]).first
+    #binding.pry
+    #session[:user_id] = user.email
+    user.logged_in = false
+    user.current_logged_in_at = nil
+    user.save
+    redirect_to root_path, notice: 'User logged out'
+    # send slo to SP.
+
+  end
+
   def sp_edit
     @user = User.where(email: params[:user_id]).first
     render :edit

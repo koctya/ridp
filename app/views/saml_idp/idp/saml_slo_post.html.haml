@@ -1,0 +1,9 @@
+!!!
+%html
+  %head
+    %meta{:charset => "utf-8"}/
+    %meta{:content => "IE=edge,chrome=1", "http-equiv" => "X-UA-Compatible"}/
+  %body{:onload => "document.forms[0].submit();", :style => "visibility:hidden;"}
+    = form_tag(@single_logout_service_url) do
+      = hidden_field_tag("SAMLResponse", @saml_slo_response)
+      = submit_tag "Submit"

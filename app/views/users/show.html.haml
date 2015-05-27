@@ -1,7 +1,13 @@
 .container
   %p#notice= notice
 
-  %h3 User: #{@user.email}
+  %h3
+    User: #{@user.email}
+    - if @user.signed_in?
+      %span.online Online since #{@user.current_logged_in_at.localtime}
+      = link_to 'Sign out', signout_path(email: @user.email)
+    - else
+      = link_to 'Sign in', signin_path(email: @user.email)
 
   %p
     %b Firstname:

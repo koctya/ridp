@@ -6,9 +6,14 @@ Rails.application.routes.draw do
 
   get '/saml/auth' => 'saml_idp#new'
   post '/saml/auth' => 'saml_idp#create'
+  get '/saml/logout' => 'saml_idp#logout'
 
   resources :users
   get '/sp_edit' => 'users#sp_edit'
+  get '/signin' => 'users#sign_in', as: :signin
+  post '/signin' => 'users#create_session'
+  get '/signout' => 'users#sign_out', as: :signout
+
 
   get '/signup' => 'users#new'
   #post '/users' => 'users#create', as: :users

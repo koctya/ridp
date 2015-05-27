@@ -35,6 +35,7 @@ gem 'devise'
 #gem 'saml_idp'
 #gem 'ruby-saml-idp'
 gem "ruby-saml-idp", :git => "https://github.com/lawrencepit/ruby-saml-idp.git"
+gem 'ruby-saml', '~> 0.9.1'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
@@ -57,7 +58,9 @@ group :development, :test do
   gem 'pry-rails'
   gem 'pry-nav'
   # Access an IRB console on exception pages or by using <%= console %> in views
-  gem 'web-console', '~> 2.0'
+  #gem 'web-console', '~> 2.0'
+  gem 'better_errors', "=0.7.2"
+  gem 'binding_of_caller'
 
   gem 'rspec-rails'
   gem 'database_cleaner'
