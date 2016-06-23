@@ -1,6 +1,7 @@
 # encoding: utf-8
 module SamlIdp
-  module Controller < SamlIdp::Controller
+=begin
+  class Controller < SamlIdp::Controller
 
     protected
 
@@ -86,4 +87,5 @@ module SamlIdp
     end
 
   end
+=end
 end
