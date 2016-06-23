@@ -17,8 +17,7 @@ class SamlIdpController < SamlIdp::IdpController
 
   def idp_make_saml_response(user)
 
-    provider = %[<saml:AttributeStatement><saml:Attribute Name="uid"><saml:AttributeValue>#{user.uid}</saml:AttributeValue></saml:Attribute><saml:Attribute Name="First Name"><saml:AttributeValue>#{user.first_name}</saml:AttributeValue></saml:Attribute><saml:Attribute Name="Last Name"><saml:AttributeValue>#{user.last_name}</saml:AttributeValue></saml:Attribute><saml:Attribute Name="http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress"><saml:AttributeValue>#{user.email}</saml:AttributeValue></saml:Attribute></saml:AttributeStatement>]
-    binding.pry
+    provider = %[<saml:AttributeStatement><saml:Attribute Name="uid"><saml:AttributeValue>#{user.uid}</saml:AttributeValue></saml:Attribute><saml:Attribute Name="firstName"><saml:AttributeValue>#{user.first_name}</saml:AttributeValue></saml:Attribute><saml:Attribute Name="lastName"><saml:AttributeValue>#{user.last_name}</saml:AttributeValue></saml:Attribute><saml:Attribute Name="http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress"><saml:AttributeValue>#{user.email}</saml:AttributeValue></saml:Attribute></saml:AttributeStatement>]
     issuer_uri = @saml_request[/<saml:Issuer>(.+?)<\/saml:Issuer>/, 1]
     encode_SAMLResponse(user.email, { attributes_provider: provider, issuer_uri: issuer_uri })
     #encode_response(user.email)
@@ -26,7 +25,6 @@ class SamlIdpController < SamlIdp::IdpController
 
   def idp_slo_authenticate(email)
     user = User.where(:email => email).first
-    #binding.pry
     if user.logged_in?
       session[:user_id] = nil
       user.logged_in = false
@@ -37,15 +35,10 @@ class SamlIdpController < SamlIdp::IdpController
   end
 
   def idp_make_saml_slo_response(user)
-    encode_SAML_SLO_Response(user.email)
+    issuer_uri = @saml_request[/<saml:Issuer>(.+?)<\/saml:Issuer>/, 1]
+    encode_SAML_SLO_Response(user.email, issuer_uri: issuer_uri )
   end
 
   private
-
-  #def find_account
-    #@subdomain = saml_acs_url[/https?:\/\/(.+?)\.example.com/, 1]
-    #@account = Account.find_by_subdomain(@subdomain)
-    #render :status => :forbidden unless @account.saml_enabled?
-  #end
 
 end
